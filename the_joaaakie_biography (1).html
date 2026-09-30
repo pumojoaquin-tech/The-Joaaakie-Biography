@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-black text-black">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Joaaakie Biography</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            comic: ['Comic Sans MS', 'Comic Sans', 'Comic Neue', 'cursive', 'sans-serif'],
+          },
+          colors: {
+            // High-saturation Lime-Emerald color palette
+            limeemerald: {
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#00ff66', /* Core vivid vibrant neon green */
+              600: '#00e65c',
+              700: '#00b347',
+              800: '#008033',
+              900: '#004d1f',
+              950: '#00260f'
+            },
+            parchment: {
+              50: '#ffffff',
+              100: '#fcfaf2',
+              200: '#f5eee0',
+              300: '#eadeca',
+              400: '#d1be9d'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Universal Font Override for Comic Sans & Pure Black Text */
+    body, button, input, select, textarea, p, h1, h2, h3, h4, h5, h6, span, div {
+      font-family: 'Comic Sans MS', 'Comic Sans', 'Comic Neue', cursive, sans-serif !important;
+      color: #000000;
+    }
+
+    /* Paper Texture Overlay */
+    .paper-texture {
+      background-color: #fcfaf2;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.95), rgba(245, 238, 224, 0.6)),
+        radial-gradient(circle at 10% 20%, rgba(180, 150, 100, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(160, 130, 80, 0.1) 0%, transparent 50%);
+      box-shadow: inset 0 0 80px rgba(80, 60, 20, 0.12);
+    }
+
+    /* Vibrant Vivid Lime-Emerald Glowing Book Outline */
+    .vivid-emerald-border {
+      border: 4px solid #00ff66;
+      box-shadow: 
+        0 0 25px rgba(0, 255, 102, 0.7),
+        0 0 50px rgba(0, 230, 92, 0.4),
+        inset 0 0 15px rgba(0, 255, 102, 0.35);
+    }
+
+    /* Vibrant Lime-Emerald Glow for Active Cards & Tabs */
+    .active-lime-glow {
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.6);
+    }
+
+    /* Custom Parchment Scrollbar with Lime-Emerald Thumb */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(234, 222, 202, 0.8);
+      border-radius: 5px;
+      border: 1px solid #d1be9d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #00e65c;
+      border-radius: 5px;
+      border: 1px solid #00b347;
+      box-shadow: 0 0 6px rgba(0, 255, 102, 0.8);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ff66;
+    }
+
+    /* Spine Center Crease for Open Book Visual Effect */
+    .book-spine {
+      background: linear-gradient(to right, 
+        rgba(0,0,0,0.04) 0%, 
+        rgba(0,0,0,0.12) 48%, 
+        rgba(0,0,0,0.2) 50%, 
+        rgba(0,0,0,0.12) 52%, 
+        rgba(0,0,0,0.04) 100%);
+    }
+  </style>
+</head>
+<body class="h-full bg-black font-comic text-black antialiased flex flex-col justify-center items-center p-2 sm:p-4 md:p-6 overflow-hidden">
+
+  <!-- MAIN BOOK CONTAINER (Parchment Paper inside, Vibrant Lime-Emerald Outline, Pure Black outside) -->
+  <div class="w-full max-w-7xl h-full max-h-[94vh] rounded-2xl paper-texture vivid-emerald-border flex flex-col overflow-hidden relative text-black shadow-2xl">
+    
+    <!-- Top Header / Book Ribbon Bar -->
+    <header class="h-16 border-b-2 border-limeemerald-600 bg-parchment-200/90 px-4 md:px-8 flex items-center justify-between z-20 shrink-0 shadow-sm">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-limeemerald-500 text-black border-2 border-limeemerald-700 flex items-center justify-center shadow-md active-lime-glow">
+          <i class="fa-solid fa-book-open text-xl text-black"></i>
+        </div>
+        <div>
+          <h1 class="font-comic font-bold text-xl md:text-2xl text-black tracking-wide">
+            The Joaaakie Biography
+          </h1>
+          <p class="text-xs font-comic text-black font-bold tracking-wider uppercase -mt-0.5 hidden sm:block">Character Archive & Codex</p>
+        </div>
+      </div>
+
+      <!-- Book Corner Decorative Embellishment -->
+      <div class="hidden md:flex items-center space-x-2 text-limeemerald-800 font-comic font-bold text-sm">
+        <span class="text-limeemerald-600 font-bold">✦</span>
+        <span class="text-black font-bold tracking-wider">ARCHIVAL BOOK</span>
+        <span class="text-limeemerald-600 font-bold">✦</span>
+      </div>
+
+      <!-- Mobile Roster Toggle Button -->
+      <button id="mobile-back-btn" onclick="toggleMobileView('grid')" class="md:hidden hidden items-center space-x-2 px-3 py-1.5 rounded-md bg-limeemerald-500 text-black border-2 border-limeemerald-700 text-xs font-comic font-bold active-lime-glow">
+        <i class="fa-solid fa-book text-black"></i>
+        <span>Catalog Index</span>
+      </button>
+    </header>
+
+    <!-- MAIN BOOK PAGES (Split View) -->
+    <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+      
+      <!-- Center Book Spine Shadow Overlay (Desktop) -->
+      <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-8 -ml-4 book-spine z-20 pointer-events-none"></div>
+
+      <!-- LEFT PAGE: Category Bookmark Tabs & Character Roster Grid -->
+      <section id="left-panel" class="w-full md:w-1/2 border-r-2 border-limeemerald-600/40 flex flex-col bg-parchment-100/60 z-10 shrink-0 transition-all duration-300">
+        
+        <!-- Search & Filter Area -->
+        <div class="p-4 border-b-2 border-limeemerald-600/40 space-y-3 bg-parchment-200/60">
+          <!-- Search Input -->
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-limeemerald-800 text-sm"></i>
+            <input type="text" id="search-input" oninput="renderGrid()" placeholder="Search characters..." class="w-full bg-white border-2 border-limeemerald-600 rounded-lg pl-9 pr-3 py-1.5 text-sm font-comic text-black font-bold placeholder-black/60 focus:outline-none focus:border-limeemerald-500 focus:ring-2 focus:ring-limeemerald-500/50 shadow-inner">
+          </div>
+
+          <!-- Category Bookmark Tabs Container -->
+          <div id="category-tabs" class="flex flex-wrap gap-1.5 pt-1">
+            <!-- Dynamic bookmark tabs rendered here -->
+          </div>
+        </div>
+
+        <!-- Character Grid Page Area -->
+        <div class="flex-1 overflow-y-auto p-4">
+          <div id="character-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3">
+            <!-- Dynamic character slots appended here -->
+          </div>
+          <div id="no-results" class="hidden text-center py-12 text-black space-y-2">
+            <i class="fa-solid fa-ghost text-3xl text-limeemerald-700"></i>
+            <p class="font-comic font-bold text-sm text-black">No characters found in this category.</p>
+          </div>
+        </div>
+
+        <!-- Page Footer Counter -->
+        <div class="px-4 py-2 border-t-2 border-limeemerald-600/40 bg-parchment-200/80 text-xs font-comic font-bold text-black flex justify-between items-center">
+          <span>CHAPTER ROSTER</span>
+          <span id="total-count" class="text-black font-bold">0 CHARACTERS</span>
+        </div>
+      </section>
+
+      <!-- RIGHT PAGE: Detailed Character Biography Render -->
+      <section id="right-panel" class="flex-1 hidden md:flex flex-col bg-white/70 relative overflow-hidden">
+        
+        <!-- Unselected Book State -->
+        <div id="empty-state" class="flex-1 flex flex-col items-center justify-center text-black p-8 text-center space-y-3">
+          <div class="w-16 h-16 rounded-full border-2 border-dashed border-limeemerald-600 flex items-center justify-center bg-parchment-200 shadow-sm">
+            <i class="fa-solid fa-arrow-left text-2xl text-limeemerald-700"></i>
+          </div>
+          <p class="font-comic font-bold text-base text-black">Click a character on the left to read their bio!</p>
+        </div>
+
+        <!-- Selected Character Biography Page Content -->
+        <div id="bio-container" class="hidden flex-1 flex-col h-full overflow-hidden p-4 md:p-6 lg:p-8 max-w-3xl mx-auto w-full">
+          
+          <!-- 1. TOP BIG PHYSICAL IMAGE / RENDER CONTAINER -->
+          <div class="relative w-full h-52 sm:h-60 md:h-64 lg:h-72 rounded-xl bg-parchment-100 border-3 border-limeemerald-500 overflow-hidden flex items-center justify-center shrink-0 shadow-lg active-lime-glow group">
+            
+            <!-- Book Plate Corner Accents -->
+            <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-limeemerald-600"></div>
+            <div class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-limeemerald-600"></div>
+            <div class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-limeemerald-600"></div>
+            <div class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-limeemerald-600"></div>
+
+            <!-- Category Header Badge -->
+            <div id="bio-category-badge" class="absolute top-3 left-3 px-3 py-1 rounded-md bg-limeemerald-500 text-black font-comic text-xs font-bold tracking-wider border border-limeemerald-700 shadow-md uppercase">
+              CATEGORY
+            </div>
+
+            <!-- Character Image Render -->
+            <img id="bio-image" src="" alt="Character Portrait" class="h-full w-full object-contain p-3 drop-shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition-transform duration-500 group-hover:scale-105" onerror="handleImageError(this)">
+            
+            <!-- Fallback Display when Slot_#.png is missing -->
+            <div id="bio-fallback-avatar" class="hidden flex-col items-center justify-center space-y-2 text-black">
+              <div class="w-20 h-20 rounded-full bg-limeemerald-500 border-2 border-limeemerald-700 flex items-center justify-center shadow-lg active-lime-glow">
+                <span id="fallback-initials" class="font-comic text-4xl font-bold text-black">?</span>
+              </div>
+              <span class="text-xs font-comic font-bold text-black" id="fallback-filename">Slot_#.png</span>
+            </div>
+          </div>
+
+          <!-- 2. CHARACTER NAME & ID TITLE -->
+          <div class="mt-4 mb-2 shrink-0 flex items-baseline justify-between border-b-2 border-limeemerald-600/50 pb-2">
+            <div>
+              <h2 id="bio-name" class="font-comic text-2xl md:text-3xl text-black font-bold tracking-wide">
+                CHARACTER NAME
+              </h2>
+              <p id="bio-id-tag" class="text-xs font-comic font-bold text-black">ID: #000</p>
+            </div>
+          </div>
+
+          <!-- 3. SCROLLABLE DESCRIPTION BOX -->
+          <div class="flex-1 min-h-[90px] overflow-y-auto pr-2 my-2 rounded-lg bg-white border-2 border-limeemerald-600/60 p-4 text-black leading-relaxed text-base font-comic font-bold shadow-inner">
+            <p id="bio-description" class="text-black">
+              Description text here...
+            </p>
+          </div>
+
+          <!-- 4. BOTTOM STATS LIST -->
+          <div class="mt-2 shrink-0 bg-parchment-200 border-2 border-limeemerald-600/80 rounded-lg p-3 shadow-sm">
+            <div class="flex items-center space-x-2 mb-2 border-b border-limeemerald-600/40 pb-1">
+              <i class="fa-solid fa-chart-bar text-limeemerald-800 text-xs"></i>
+              <h3 class="font-comic text-xs font-bold tracking-wider uppercase text-black">CHARACTER STATISTICS</h3>
+            </div>
+            <!-- Dynamic Stats Container -->
+            <div id="bio-stats-grid" class="flex flex-wrap gap-2">
+              <!-- Stat badges dynamically injected -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // =========================================================================
+    // THE JOAAAKIE BIOGRAPHY - CONFIGURABLE CHARACTER DATA LISTS
+    // =========================================================================
+
+    // 1. Categories List
+    const CATEGORIES = {
+      "1": "Main",
+      "2": "Not Canon",
+      "3": "Side Characters"
+    };
+
+    // 2. ID Descriptions (ID matches character's ID)
+    const DESCRIPTIONS = {
+      "1": "this is character 1!",
+      "2": "this is character 2!",
+      "3": "this is character 3!"
+    };
+
+    // 3. Stats List (Stats ID matches character's Stats reference)
+    const STATS = {
+      "1": ["Speed: 95", "Strength: 88", "Gender: Male", "Pronouns: He/Him", "State: Active"],
+      "2": ["Speed: 50", "Strength: 30", "Gender: Unknown", "Pronouns: They/Them", "State: Non-Canon"],
+      "3": ["Speed: 75", "Strength: 70", "Gender: Female", "Pronouns: She/Her", "State: Alive"]
+    };
+
+    // 4. Character Variable Master List
+    // Structure: "Name", "Slot_#.png", ID: "#", Category: "#", Stats: "#"
+    const CHARACTERS = [
+      { name: "Character1", image: "Slot_1.png", id: "1", category: "1", stats: "1" },
+      { name: "Character2", image: "Slot_2.png", id: "2", category: "2", stats: "2" },
+      { name: "Character3", image: "Slot_3.png", id: "3", category: "1", stats: "3" }
+    ];
+
+    // =========================================================================
+    // APPLICATION CONTROLLER
+    // =========================================================================
+
+    let selectedCategoryId = "ALL";
+    let selectedCharacterIndex = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCategoryTabs();
+      renderGrid();
+      
+      // Auto select first character on page load
+      if (CHARACTERS.length > 0) {
+        selectCharacter(0);
+      }
+    });
+
+    function renderCategoryTabs() {
+      const container = document.getElementById('category-tabs');
+      container.innerHTML = '';
+
+      // All Categories Tab
+      container.appendChild(createTabButton("ALL", "All Categories", selectedCategoryId === "ALL"));
+
+      // Dynamic Category Tabs
+      Object.keys(CATEGORIES).forEach(catId => {
+        const catName = CATEGORIES[catId];
+        container.appendChild(createTabButton(catId, catName, selectedCategoryId === catId));
+      });
+    }
+
+    function createTabButton(id, label, isActive) {
+      const btn = document.createElement('button');
+      btn.className = `px-3 py-1 rounded-md font-comic text-xs font-bold transition-all duration-200 border-2 ${
+        isActive 
+          ? 'bg-limeemerald-500 border-limeemerald-700 text-black active-lime-glow shadow-md scale-105' 
+          : 'bg-white border-limeemerald-600/50 text-black hover:bg-limeemerald-300/40 hover:border-limeemerald-600'
+      }`;
+      btn.innerText = label;
+      btn.onclick = () => {
+        selectedCategoryId = id;
+        renderCategoryTabs();
+        renderGrid();
+      };
+      return btn;
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('character-grid');
+      const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+      const noResults = document.getElementById('no-results');
+      
+      grid.innerHTML = '';
+      let visibleCount = 0;
+
+      CHARACTERS.forEach((char, index) => {
+        const matchesCategory = selectedCategoryId === "ALL" || char.category === selectedCategoryId;
+        const matchesSearch = char.name.toLowerCase().includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          visibleCount++;
+          const isSelected = selectedCharacterIndex === index;
+
+          const card = document.createElement('div');
+          card.className = `relative cursor-pointer rounded-xl border-2 p-3 flex flex-col items-center justify-between transition-all duration-200 aspect-square ${
+            isSelected 
+              ? 'bg-limeemerald-400/30 border-limeemerald-500 ring-2 ring-limeemerald-500 active-lime-glow scale-[1.02]' 
+              : 'bg-white border-limeemerald-600/50 hover:border-limeemerald-500 hover:bg-parchment-50 hover:scale-[1.01]'
+          }`;
+
+          const categoryName = CATEGORIES[char.category] || "General";
+
+          card.innerHTML = `
+            <div class="w-full flex justify-between items-center text-[10px] font-comic font-bold text-black">
+              <span class="truncate max-w-[70px]">${categoryName}</span>
+              <span>ID:${char.id}</span>
+            </div>
+
+            <!-- Slot Thumbnail Container -->
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden bg-parchment-200 border-2 border-limeemerald-600 my-1 flex items-center justify-center p-1 shadow-sm">
+              <img src="${char.image}" alt="${char.name}" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/150x150/f5eee0/000000?text=${encodeURIComponent(char.name.charAt(0))}';">
+            </div>
+
+            <!-- Character Name -->
+            <div class="w-full text-center">
+              <p class="font-comic text-xs font-bold truncate text-black">${char.name}</p>
+            </div>
+          `;
+
+          card.onclick = () => {
+            selectCharacter(index);
+            if (window.innerWidth < 768) {
+              toggleMobileView('bio');
+            }
+          };
+
+          grid.appendChild(card);
+        }
+      });
+
+      document.getElementById('total-count').innerText = `${visibleCount} OF ${CHARACTERS.length} CHARACTERS`;
+      
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+
+    function selectCharacter(index) {
+      selectedCharacterIndex = index;
+      const char = CHARACTERS[index];
+      if (!char) return;
+
+      renderGrid();
+
+      document.getElementById('empty-state').classList.add('hidden');
+      const bioContainer = document.getElementById('bio-container');
+      bioContainer.classList.remove('hidden');
+      bioContainer.classList.add('flex');
+
+      document.getElementById('bio-name').innerText = char.name;
+      document.getElementById('bio-id-tag').innerText = `ID: #${char.id}`;
+      document.getElementById('bio-category-badge').innerText = CATEGORIES[char.category] || "General";
+
+      const imgElem = document.getElementById('bio-image');
+      const fallbackElem = document.getElementById('bio-fallback-avatar');
+      
+      imgElem.classList.remove('hidden');
+      fallbackElem.classList.add('hidden');
+      imgElem.src = char.image;
+
+      // Lookup description using character ID
+      const descText = DESCRIPTIONS[char.id] || "No description provided for this character.";
+      document.getElementById('bio-description').innerText = descText;
+
+      // Lookup stats using character Stats reference
+      const statsGrid = document.getElementById('bio-stats-grid');
+      statsGrid.innerHTML = '';
+      
+      const statsList = STATS[char.stats] || [];
+
+      if (statsList.length === 0) {
+        statsGrid.innerHTML = `<span class="text-xs font-comic font-bold text-black italic">No stats listed.</span>`;
+      } else {
+        statsList.forEach(statItem => {
+          const badge = document.createElement('div');
+          badge.className = "bg-white border-2 border-limeemerald-600 rounded-md px-2.5 py-1 text-xs font-comic font-bold text-black shadow-sm flex items-center space-x-1.5";
+          badge.innerHTML = `<span class="text-limeemerald-600 font-bold">•</span><span>${statItem}</span>`;
+          statsGrid.appendChild(badge);
+        });
+      }
+    }
+
+    function handleImageError(image) {
+      image.classList.add('hidden');
+      const fallback = document.getElementById('bio-fallback-avatar');
+      const char = CHARACTERS[selectedCharacterIndex];
+      
+      if (char) {
+        document.getElementById('fallback-initials').innerText = char.name.charAt(0).toUpperCase();
+        document.getElementById('fallback-filename').innerText = char.image;
+      }
+      fallback.classList.remove('hidden');
+      fallback.classList.add('flex');
+    }
+
+    function toggleMobileView(view) {
+      const leftPanel = document.getElementById('left-panel');
+      const rightPanel = document.getElementById('right-panel');
+      const backBtn = document.getElementById('mobile-back-btn');
+
+      if (view === 'bio') {
+        leftPanel.classList.add('hidden');
+        rightPanel.classList.remove('hidden');
+        rightPanel.classList.add('flex');
+        backBtn.classList.remove('hidden');
+        backBtn.classList.add('flex');
+      } else {
+        leftPanel.classList.remove('hidden');
+        rightPanel.classList.add('hidden');
+        rightPanel.classList.remove('flex');
+        backBtn.classList.add('hidden');
+        backBtn.classList.remove('flex');
+      }
+    }
+  </script>
+</body>
+</html>
