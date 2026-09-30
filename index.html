@@ -192,7 +192,7 @@
         <div id="bio-container" class="hidden flex-1 flex-col h-full overflow-hidden p-4 md:p-6 lg:p-8 max-w-3xl mx-auto w-full">
           
           <!-- 1. TOP BIG PHYSICAL IMAGE / RENDER CONTAINER -->
-          <div class="relative w-full h-52 sm:h-60 md:h-64 lg:h-72 rounded-xl bg-parchment-100 border-3 border-limeemerald-500 overflow-hidden flex items-center justify-center shrink-0 shadow-lg active-lime-glow group">
+          <div class="relative w-full h-48 sm:h-56 md:h-60 lg:h-64 rounded-xl bg-parchment-100 border-3 border-limeemerald-500 overflow-hidden flex items-center justify-center shrink-0 shadow-lg active-lime-glow group">
             
             <!-- Book Plate Corner Accents -->
             <div class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-limeemerald-600"></div>
@@ -218,7 +218,7 @@
           </div>
 
           <!-- 2. CHARACTER NAME & ID TITLE -->
-          <div class="mt-4 mb-2 shrink-0 flex items-baseline justify-between border-b-2 border-limeemerald-600/50 pb-2">
+          <div class="mt-3 mb-1 shrink-0 flex items-baseline justify-between border-b-2 border-limeemerald-600/50 pb-1">
             <div>
               <h2 id="bio-name" class="font-comic text-2xl md:text-3xl text-black font-bold tracking-wide">
                 CHARACTER NAME
@@ -228,22 +228,48 @@
           </div>
 
           <!-- 3. SCROLLABLE DESCRIPTION BOX -->
-          <div class="flex-1 min-h-[90px] overflow-y-auto pr-2 my-2 rounded-lg bg-white border-2 border-limeemerald-600/60 p-4 text-black leading-relaxed text-base font-comic font-bold shadow-inner">
+          <div class="flex-1 min-h-[70px] overflow-y-auto pr-2 my-1 rounded-lg bg-white border-2 border-limeemerald-600/60 p-3 text-black leading-relaxed text-sm font-comic font-bold shadow-inner">
             <p id="bio-description" class="text-black">
               Description text here...
             </p>
           </div>
 
-          <!-- 4. BOTTOM STATS LIST -->
-          <div class="mt-2 shrink-0 bg-parchment-200 border-2 border-limeemerald-600/80 rounded-lg p-3 shadow-sm">
-            <div class="flex items-center space-x-2 mb-2 border-b border-limeemerald-600/40 pb-1">
-              <i class="fa-solid fa-chart-bar text-limeemerald-800 text-xs"></i>
-              <h3 class="font-comic text-xs font-bold tracking-wider uppercase text-black">CHARACTER STATISTICS</h3>
+          <!-- 4. BOTTOM STATS & RELATIONSHIPS SECTION -->
+          <div class="mt-1 shrink-0 bg-parchment-200 border-2 border-limeemerald-600/80 rounded-lg p-2.5 shadow-sm space-y-2 overflow-y-auto max-h-[160px]">
+            
+            <!-- Statistics Block -->
+            <div>
+              <div class="flex items-center space-x-1.5 mb-1.5 border-b border-limeemerald-600/40 pb-0.5">
+                <i class="fa-solid fa-chart-bar text-limeemerald-800 text-xs"></i>
+                <h3 class="font-comic text-xs font-bold tracking-wider uppercase text-black">STATISTICS & DETAILS</h3>
+              </div>
+              <div id="bio-stats-grid" class="flex flex-wrap gap-1.5">
+                <!-- Dynamic stat badges -->
+              </div>
             </div>
-            <!-- Dynamic Stats Container -->
-            <div id="bio-stats-grid" class="flex flex-wrap gap-2">
-              <!-- Stat badges dynamically injected -->
+
+            <!-- Aliases Block -->
+            <div>
+              <div class="flex items-center space-x-1.5 mb-1.5 border-b border-limeemerald-600/40 pb-0.5">
+                <i class="fa-solid fa-masks-theater text-limeemerald-800 text-xs"></i>
+                <h3 class="font-comic text-xs font-bold tracking-wider uppercase text-black">ALIASES</h3>
+              </div>
+              <div id="bio-aliases-list" class="flex flex-wrap gap-1.5">
+                <!-- Dynamic alias badges -->
+              </div>
             </div>
+
+            <!-- Relationships Block -->
+            <div>
+              <div class="flex items-center space-x-1.5 mb-1.5 border-b border-limeemerald-600/40 pb-0.5">
+                <i class="fa-solid fa-heart-circle-bolt text-limeemerald-800 text-xs"></i>
+                <h3 class="font-comic text-xs font-bold tracking-wider uppercase text-black">RELATIONSHIPS</h3>
+              </div>
+              <div id="bio-relationships-list" class="flex flex-wrap gap-1.5">
+                <!-- Dynamic relationship items -->
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -259,35 +285,114 @@
 
     // 1. Categories List
     const CATEGORIES = {
-      "1": "Main Characters (Canon)",
-      "2": "Main Characters (Not canon)",
-      "3": "Secondary Characters",
+      "1": "Main Characters",
+      "2": "Secondary Characters",
+      "3": "Background Characters",
       "4": "Joaaakie Variants",
       "5": "Real World",
       "6": "Other/Misc.",
     };
 
-    // 2. ID Descriptions (ID matches character's ID)
+    // 2. ID Descriptions
     const DESCRIPTIONS = {
       "1": "This is Joa!. He's A cool fella!. he spends most of his time with friends and with his girlfriend. he also tries his best to stop Evil Joa's Plans.",
       "2": "Despite being Joa's Girlfriend, she's very kind. passive and very sweet. she loves Joa so much that no matter what, she will do her best to go out and Help him out!",
-      "3": "He is the "COOLEST" of the group. according to Joa. althought he tries his best to actually be cool, he is mostly serious, relaxed, and stylish. be careful with who you want to reflex on!, cause this fella is not the one you want to mess with!.",
-      "4": "Placeholder."
+      "3": "He is the \"COOLEST\" of the group, according to Joa. Although he tries his best to actually be cool, he is mostly serious, relaxed, and stylish.",
+      "4": "This is Joa's Little Sister. She's very shy, and scared of everything!. She barely knows how to do advanced stuff like how Joa Does!."
     };
 
-    // 3. Stats List (Stats ID matches character's Stats reference)
+    // 3. Stats List (Customizable base statistics)
     const STATS = {
-      "1": ["Speed: 95", "Strength: 88", "Gender: Male", "Pronouns: He/Him", "State: Active"],
-      "2": ["Speed: 50", "Strength: 30", "Gender: Unknown", "Pronouns: They/Them", "State: Non-Canon"],
-      "3": ["Speed: 75", "Strength: 70", "Gender: Female", "Pronouns: She/Her", "State: Alive"]
+      "1": ["Speed: 95", "Strength: 120", "Gender: Male", "Pronouns: He/Him", "State: Alive"],
+      "2": ["Speed: 45", "Strength: 35", "Gender: Female", "Pronouns: She/Her", "State: Alive"],
+      "3": ["Speed: 75", "Strength: 80", "Gender: Male", "Pronouns: He/Him", "State: Alive"],
+      "4": ["Speed: 35", "Strength: 10", "Gender: Female", "Pronouns: She/Her", "State: Alive"]
     };
 
-    // 4. Character Variable Master List
-    // Structure: "Name", "Slot_#.png", ID: "#", Category: "#", Stats: "#"
+    // 4. Aliases List (Format: "alias (by Nicknamer Character)")
+    const ALIASES = {
+      "1": ["Sweet Genius (By Emily)", "Dumpass Punkimg (by Kyle)", "Moron (by Evil Joa)"],
+      "2": ["Sweetie (by Joa)", "Lady (by Kyle)"],
+      "3": ["COOLEST one (by Joa)", "Charming Friend (by Emily)", "Uncle Kyle (by Jessica)"],
+      "4": ["Sis' (by Joa)", "Tiny Diamond (by Emily)", "Dumb Sister (by Evil Joa)"]
+    };
+
+    // 5. One-Sided Relationships List
+    const RELATIONSHIPS = {
+      "1": [
+        { target: "Emily", type: "Girlfriend" },
+        { target: "Kyle", type: "Best Friend" },
+        { target: "Jessica", type: "Brothers" },
+        { target: "Evil Joa", type: "Enemy" },
+        { target: "Kaaatie", type: "Pal" }
+      ],
+      "2": [
+        { target: "Joa", type: "Boyfriend" },
+        { target: "Kyle", type: "Friends" },
+        { target: "Jessica", type: "Friends" },
+        { target: "Evil Joa", type: "Afraid" }
+      ],
+      "3": [
+        { target: "Joa", type: "Friends" },
+        { target: "Emily", type: "Friends" },
+        { target: "Jessica", type: "Friends" },
+        { target: "Evil Joa", type: "Hate" }
+      ],
+      "4": [
+        { target: "Joa", type: "Brothers" },
+        { target: "Kyle", type: "Stranger" },
+        { target: "Jessica", type: "Friends" },
+        { target: "Evil Joa", type: "Afraid" }
+      ]
+    };
+
+    // 6. Character Master List
+    // Structure: Name, Physical Image, ID, Category, Stats, Aliases, Relationships, Approx. Age, Is Canon?
     const CHARACTERS = [
-      { name: "Character1", image: "Slot_1.png", id: "1", category: "1", stats: "1" },
-      { name: "Character2", image: "Slot_2.png", id: "2", category: "2", stats: "2" },
-      { name: "Character3", image: "Slot_3.png", id: "3", category: "1", stats: "3" }
+      { 
+        name: "Joa", 
+        image: "Slot_1.png", 
+        id: "1", 
+        category: "1", 
+        stats: "1",
+        aliases: "1",
+        relationships: "1",
+        approxAge: "16",
+        isCanon: "Yes"
+      },
+      { 
+        name: "Emily", 
+        image: "Slot_2.png", 
+        id: "2", 
+        category: "1", 
+        stats: "2",
+        aliases: "2",
+        relationships: "2",
+        approxAge: "17",
+        isCanon: "Yes"
+      },
+      { 
+        name: "Kyle", 
+        image: "Slot_3.png", 
+        id: "3", 
+        category: "1", 
+        stats: "3",
+        aliases: "3",
+        relationships: "3",
+        approxAge: "21",
+        isCanon: "Yes"
+      },
+      { 
+        name: "Jessica", 
+        image: "Slot_4.png", 
+        id: "4", 
+        category: "1", 
+        stats: "4",
+        aliases: "4",
+        relationships: "4",
+        approxAge: "7",
+        isCanon: "Yes"
+      }
     ];
 
     // =========================================================================
@@ -426,20 +531,51 @@
       const descText = DESCRIPTIONS[char.id] || "No description provided for this character.";
       document.getElementById('bio-description').innerText = descText;
 
-      // Lookup stats using character Stats reference
+      // 1. STATS SECTION (Includes Age & Canon Status)
       const statsGrid = document.getElementById('bio-stats-grid');
       statsGrid.innerHTML = '';
       
-      const statsList = STATS[char.stats] || [];
+      const statsList = [...(STATS[char.stats] || [])];
+      
+      if (char.approxAge) statsList.unshift(`Approximate Age: ${char.approxAge}`);
+      if (char.isCanon) statsList.unshift(`Is Canon?: ${char.isCanon}`);
 
-      if (statsList.length === 0) {
-        statsGrid.innerHTML = `<span class="text-xs font-comic font-bold text-black italic">No stats listed.</span>`;
+      statsList.forEach(statItem => {
+        const badge = document.createElement('div');
+        badge.className = "bg-white border-2 border-limeemerald-600 rounded-md px-2 py-0.5 text-xs font-comic font-bold text-black shadow-sm flex items-center space-x-1";
+        badge.innerHTML = `<span class="text-limeemerald-600 font-bold">•</span><span>${statItem}</span>`;
+        statsGrid.appendChild(badge);
+      });
+
+      // 2. ALIASES SECTION
+      const aliasesListElem = document.getElementById('bio-aliases-list');
+      aliasesListElem.innerHTML = '';
+      const aliasItems = ALIASES[char.aliases] || [];
+
+      if (aliasItems.length === 0) {
+        aliasesListElem.innerHTML = `<span class="text-xs font-comic font-bold text-black italic">None listed.</span>`;
       } else {
-        statsList.forEach(statItem => {
+        aliasItems.forEach(alias => {
           const badge = document.createElement('div');
-          badge.className = "bg-white border-2 border-limeemerald-600 rounded-md px-2.5 py-1 text-xs font-comic font-bold text-black shadow-sm flex items-center space-x-1.5";
-          badge.innerHTML = `<span class="text-limeemerald-600 font-bold">•</span><span>${statItem}</span>`;
-          statsGrid.appendChild(badge);
+          badge.className = "bg-parchment-100 border border-limeemerald-700 rounded-md px-2 py-0.5 text-xs font-comic font-bold text-black shadow-sm";
+          badge.innerText = alias;
+          aliasesListElem.appendChild(badge);
+        });
+      }
+
+      // 3. RELATIONSHIPS SECTION
+      const relListElem = document.getElementById('bio-relationships-list');
+      relListElem.innerHTML = '';
+      const relItems = RELATIONSHIPS[char.relationships] || [];
+
+      if (relItems.length === 0) {
+        relListElem.innerHTML = `<span class="text-xs font-comic font-bold text-black italic">No relationships listed.</span>`;
+      } else {
+        relItems.forEach(rel => {
+          const badge = document.createElement('div');
+          badge.className = "bg-white border-2 border-limeemerald-600 rounded-md px-2 py-0.5 text-xs font-comic font-bold text-black shadow-sm flex items-center space-x-1";
+          badge.innerHTML = `<span class="text-limeemerald-600 font-bold">➔</span><span><strong>${rel.target}</strong> (${rel.type})</span>`;
+          relListElem.appendChild(badge);
         });
       }
     }
